@@ -5,7 +5,7 @@ import torch
 
 def func(x):
     if x>0:
-        return x
+        return 2*x + 5
     return 0
 
 
