@@ -1,4 +1,5 @@
 save.model
 *.png
-datasets/
+MNIST/
 *.pyc
+*.pt

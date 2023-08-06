@@ -7,7 +7,7 @@ from model import neuralNetwork
 
 batch_size = 64
 learning_rate = 1e-1
-num_epochs = 50
+num_epochs = 5
 use_gpu = torch.cuda.is_available()
 
 
@@ -27,7 +27,7 @@ model = neuralNetwork(28 * 28, 300, 100, 10)
 if use_gpu:
     model = model.cuda()
 
-criterion = nn.NLLLoss()
+criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
 for epoch in range(num_epochs):
@@ -37,6 +37,7 @@ for epoch in range(num_epochs):
     running_acc = 0.0
     for i, data in enumerate(train_loader, 1):
         img, label = data
+        #label = label.float()
         img = img.view(img.size(0), -1)
         if use_gpu:
             img = img.cuda()
@@ -57,22 +58,8 @@ for epoch in range(num_epochs):
     print(f'Finish {epoch+1} epoch, Loss: {running_loss/i:.6f}, Acc: {running_acc/i:.6f}')
     model.eval()
 
-'''
-    eval_loss = 0.
-    eval_acc = 0.
-    for data in test_loader:
-        img, label = data
-        img = img.view(img.size(0), -1)
-        if use_gpu:
-            img = img.cuda()
-            label = label.cuda()
-        with torch.no_grad():
-            out = model(img)
-            loss = criterion(out, label)
-        eval_loss += loss.item()
-        _, pred = torch.max(out, 1)
-        eval_acc += (pred == label).float().mean()
-    print(f'Test Loss: {eval_loss/len(test_loader):.6f}, Acc: {eval_acc/len(test_loader):.6f}\n')
-'''
-
+for name, param in model.named_parameters():
+    if param.requires_grad:
+        print(name, param.data)
+print()
 torch.save(model, 'save.model')
