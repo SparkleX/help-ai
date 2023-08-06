@@ -52,6 +52,11 @@ for epoch in range(num_epochs):
         loss.backward()
         optimizer.step()
 
+        for param in model.parameters():
+            #if param.requires_grad:
+            print(len(param))
+        print()
+
         if i % 300 == 0:
             print(f'[{epoch+1}/{num_epochs}] Loss: {running_loss/i:.6f}, Acc: {running_acc/i:.6f}')
     print(f'Finish {epoch+1} epoch, Loss: {running_loss/i:.6f}, Acc: {running_acc/i:.6f}')

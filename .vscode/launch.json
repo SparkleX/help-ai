@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}/03",
+            "cwd": "${workspaceFolder}/gan",
             "justMyCode": true
         }
     ]
