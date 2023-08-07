@@ -9,10 +9,10 @@ y_train = torch.load('datasets/train_target.pt')
 
 model = NonLinearRegression()
 criterion = nn.MSELoss()
-optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
+optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
 
 # 开始训练
-num_epochs = 50000
+num_epochs = 5000
 for epoch in range(num_epochs):
     inputs = x_train
     target = y_train
@@ -36,12 +36,9 @@ for epoch in range(num_epochs):
 model.eval()
 
 torch.save(model, 'save.model')
-fig = plt.figure(figsize=(10, 5))
+fig = plt.figure(figsize=(10, 10))
 plt.plot(x_train.numpy(), y_train.numpy(), 'ro', label='Original data')
 plt.plot(x_train.numpy(), out.data.numpy(), label='Fitting Line')
 
 plt.legend() 
 plt.show()
-
-x_train = torch.from_numpy(x_train)
-y_train = torch.from_numpy(y_train)

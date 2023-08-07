@@ -19,7 +19,7 @@ for x in range(-10,10):
 x_train = np.array(x_train, dtype=np.float32)
 y_train = np.array(y_train, dtype=np.float32)
 
-fig = plt.figure(figsize=(10, 5))
+fig = plt.figure(figsize=(10, 10))
 plt.plot(x_train, y_train, 'ro', label='Original data')
 plt.legend() 
 plt.show()

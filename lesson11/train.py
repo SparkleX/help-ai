@@ -17,7 +17,7 @@ train_dataset = datasets.MNIST(
 test_dataset = datasets.MNIST(
     root='./datasets', train=False, transform=transforms.ToTensor())
 
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=False)
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 
@@ -27,7 +27,7 @@ model = neuralNetwork(28 * 28, 300, 100, 10)
 if use_gpu:
     model = model.cuda()
 
-criterion = nn.NLLLoss()
+criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
 for epoch in range(num_epochs):
@@ -51,11 +51,6 @@ for epoch in range(num_epochs):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-
-        for param in model.parameters():
-            #if param.requires_grad:
-            print(len(param))
-        print()
 
         if i % 300 == 0:
             print(f'[{epoch+1}/{num_epochs}] Loss: {running_loss/i:.6f}, Acc: {running_acc/i:.6f}')

@@ -12,7 +12,7 @@ criterion = nn.MSELoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
 
 # 开始训练
-num_epochs = 50000
+num_epochs = 5000
 for epoch in range(num_epochs):
     inputs = x_train
     target = y_train
