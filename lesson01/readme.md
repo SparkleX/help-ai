@@ -1,0 +1,11 @@
+- Design
+  - Model
+    - Parameters
+    - Learning rate
+  - Criterion (评估算法)
+  - Optimizer
+- Run
+  - Train
+  - Gen
+  - Loss
+  
